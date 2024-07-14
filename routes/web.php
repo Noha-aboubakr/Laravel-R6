@@ -164,9 +164,3 @@ Route::prefix('cars')->group(function () {
         });
     });  
     });
-
-
-
-
-
-  
