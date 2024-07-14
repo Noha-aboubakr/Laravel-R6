@@ -194,4 +194,3 @@ Route::get('login', function () {
 Route::post('/login_accepted', function (){
     return "login accepted.";
 })->name('login_accepted');
-
