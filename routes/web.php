@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExampleController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
@@ -187,6 +188,7 @@ Route::get('welcome', function (){
     return "Welcome to Laravel.";
 })->name('w');
 
+
 Route::get('login', function () {
     return view('login');
 });
@@ -194,3 +196,23 @@ Route::get('login', function () {
 Route::post('/login_accepted', function (){
     return "login accepted.";
 })->name('login_accepted');
+
+
+                                                //Session3/task3
+
+// Route::get('contactus', function () {
+// return view('contactus');
+// });  
+
+// Route::post('contact_us', function (\Illuminate\Http\Request $request) {  
+//     $name = $request->input('name');
+//     $email = $request->input('email');  
+//     $subject = $request->input('subject');  
+//     $message = $request->input('message');  
+//     return 'username: ' . $name . "<br>" . ' email: ' . $email . "<br>" . ' subject: ' . $subject . "<br>" . ' message: ' . $message;  
+// })->name('contact_us'); 
+
+Route::get('contactus', [ExampleController::class, 'contactus']);
+Route::post('contact_us', [ExampleController::class, 'contact_us'])->name('contact_us'); 
+    
+   
