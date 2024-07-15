@@ -214,5 +214,6 @@ Route::post('/login_accepted', function (){
 
 Route::get('contactus', [ExampleController::class, 'contactus']);
 Route::post('contact_us', [ExampleController::class, 'contact_us'])->name('contact_us'); 
+
     
    
