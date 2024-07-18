@@ -211,6 +211,8 @@ Route::post('contact_us', [ExampleController::class, 'contact_us'])->name('conta
 Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
 Route::post('cars', [CarController::class, 'store'])->name('cars.store');
     
+
+
                                             //Session4/task4
 
 Route::get('classes/create', [ClassController::class, 'create'])->name('classes.create');

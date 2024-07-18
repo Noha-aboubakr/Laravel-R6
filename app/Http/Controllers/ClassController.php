@@ -36,8 +36,8 @@ class ClassController extends Controller
         $price= $request->input('price');
         $timefrom= $request->input('timefrom');
         $timeto= $request->input('timeto');
-        $isfulled= $request->input('isfulled');
 
+        $isfulled= $request->input('isfulled');
         if($isfulled) {
 			$isfulled= 1;
 			}else {

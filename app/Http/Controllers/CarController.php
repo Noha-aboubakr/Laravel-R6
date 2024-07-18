@@ -29,10 +29,17 @@ class CarController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        $cartitle= 'BMW';
-        $price= '12';
-        $description= 'test';
-        $published= true;
+        $cartitle= $request->input('cartitle');
+        $price= $request->input('price');
+        $description= $request->input('description');
+
+        $published= $request->input('published');
+        if($published) {
+			$published= 1;
+			}else {
+				$published = 0; 
+			}
+
 
         Car::create([
             'cartitle'=> $cartitle,
