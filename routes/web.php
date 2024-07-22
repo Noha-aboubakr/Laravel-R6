@@ -3,6 +3,9 @@
 use App\Http\Controllers\ExampleController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\ClassController;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
@@ -198,21 +201,30 @@ Route::post('/login_accepted', function (){
 })->name('login_accepted');
 
 
+
                                                 //Session3/task3
-
-// Route::get('contactus', function () {
-// return view('contactus');
-// });  
-
-// Route::post('contact_us', function (\Illuminate\Http\Request $request) {  
-//     $name = $request->input('name');
-//     $email = $request->input('email');  
-//     $subject = $request->input('subject');  
-//     $message = $request->input('message');  
-//     return 'username: ' . $name . "<br>" . ' email: ' . $email . "<br>" . ' subject: ' . $subject . "<br>" . ' message: ' . $message;  
-// })->name('contact_us'); 
-
 Route::get('contactus', [ExampleController::class, 'contactus']);
 Route::post('contact_us', [ExampleController::class, 'contact_us'])->name('contact_us'); 
+
+
+                                              //Session4
+Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
+Route::post('cars', [CarController::class, 'store'])->name('cars.store');
+
+
+                                            //session5
+Route::get('cars', [CarController::class, 'index'])->name('cars.index');
     
-   
+
+                                            //Session4/task4
+Route::get('classes/create', [ClassController::class, 'create'])->name('classes.create');
+Route::post('classes', [ClassController::class, 'store'])->name('classes.store');
+
+                                        
+                                            //session 5
+Route::get('classes', [ClassController::class, 'index'])->name('classes.index');
+Route::get('cars/{id}', [CarController::class, 'edit'])->name('cars.edit');
+
+
+                                            //session5/task5
+Route::get('classes/{id}', [ClassController::class, 'edit'])->name('classes.edit');
