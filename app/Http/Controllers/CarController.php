@@ -12,7 +12,9 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        //session 5
+        $cars = Car::get();
+        return view('cars', compact('cars'));
     }
 
     /**
@@ -66,7 +68,8 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $car= car::findOrFail($id);
+        return view ('edit_car', compact('car'));
     }
 
     /**

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Car</title>
+  <title>All Classes</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,25 +23,29 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">All Cars</h2>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">All Classes</h2>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
-              <th scope="col">Car Title</th>
-              <th scope="col">Price</th>
-              <th scope="col">Description</th>
-              <th scope="col">Published</th>
+              <th scope="col">Class Name</th>
+              <th scope="col">capacity</th>
+              <th scope="col">price</th>
+              <th scope="col">From</th>
+              <th scope="col">To</th>
+              <th scope="col">Is fulled</th>
               <th scope="col">Edit</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($cars as $car)
+            @foreach($classes as $classe)
             <tr>
-              <td scope="row">{{$car['cartitle']}}</td>
-              <td>{{$car['price']}}</td>
-              <td>{{Str::limit ($car['description'],20,$end='......')}}</td>
-              <td>@if($car['published']== 1) yes @else no @endif</td>
-              <td><a href={{route('cars.edit', $car['id'])}}>Edit</a></td>
+              <td scope="row">{{$classe['classname']}}</td>
+              <td>{{$classe['capacity']}}</td>
+              <td>{{$classe['price']}}</td>
+              <td>{{$classe['timefrom']}}</td>
+              <td>{{$classe['timeto']}}</td>
+              <td>{{$classe['isfulled']}}</td>
+              <td><a href={{route('classes.edit', $classe['id'])}}>Edit</a></td>
             </tr>
             @endforeach
           </tbody>

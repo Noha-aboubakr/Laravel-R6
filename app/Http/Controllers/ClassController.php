@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\classe;
-
 use function Pest\Laravel\post;
+
 
 class ClassController extends Controller
 {
@@ -15,7 +14,8 @@ class ClassController extends Controller
      */
     public function index()
     {
-        //
+        $classes = classe::get();
+        return view('classes', compact('classes'));
     }
 
     /**
@@ -72,7 +72,8 @@ class ClassController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $classe= classe::findOrFail($id);
+        return view ('edit_classe', compact('classe'));
     }
 
     /**
