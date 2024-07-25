@@ -44,12 +44,8 @@
               <td>{{$classe['timefrom']}}</td>
               <td>{{$classe['timeto']}}</td>
               <td>{{$classe['isfulled']}}</td>
-              {{-- <td><a href={{route('classes.edit', $classe['id'])}}>Edit</a></td> --}}
               <td><a href="">Delete</a></td>
-              {{-- <td><form action="{{route('classes.destroy', $classe->id)}}" method="POST">  
-                @csrf   
-                @method('DELETE')  
-                <input type="hidden" name="id" value="{{$classe->id}}"> --}}
+            
               </form>
               </tr>
             @endforeach
