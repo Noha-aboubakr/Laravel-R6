@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Car</title>
+  <title>Trashed Cars</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">All Cars</h2>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">Trashed Cars</h2>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
@@ -31,8 +31,7 @@
               <th scope="col">Price</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Delete</th>
+              <th scope="col">Deleted</th>
               {{-- <th scope="col">details</th> --}}
 
             </tr>
@@ -40,14 +39,14 @@
           <tbody>
             @foreach($cars as $car)
             <tr>
-              <td scope="row"><a href="{{route('cars.details', $car['id'])}}">{{$car['cartitle']}}</a></td>
+              <td scope="row"><a href="">{{$car['cartitle']}}</a></td>
               {{-- <td scope="row">{{$car['cartitle']}}</td> --}}
               <td>{{$car['price']}}</td>
               <td>{{Str::limit ($car['description'],20,$end='......')}}</td>
               <td>@if($car['published']== 1) yes @else no @endif</td>
               <td><a href={{route('cars.edit', $car['id'])}}>Edit</a></td>
               {{-- <td><a href={{route('cars.details', $car['id'])}}>Car details</a></td> --}}
-              <td><a href="{{route('cars.destroy', $car['id'])}}" onclick="confirm('Are you sure you want to delete?')">Delete</a></td>
+              <td><a href="">Delete</a></td>
             </tr>
             @endforeach
           </tbody>

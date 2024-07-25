@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,19 +33,28 @@
               <th scope="col">To</th>
               <th scope="col">Is fulled</th>
               <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
             @foreach($classes as $classe)
             <tr>
-              <td scope="row">{{$classe['classname']}}</td>
+              <td scope="row"><a href="{{route('classes.details', $classe['id'])}}">{{$classe['classname']}}</a></td>
               <td>{{$classe['capacity']}}</td>
               <td>{{$classe['price']}}</td>
               <td>{{$classe['timefrom']}}</td>
               <td>{{$classe['timeto']}}</td>
               <td>{{$classe['isfulled']}}</td>
               <td><a href={{route('classes.edit', $classe['id'])}}>Edit</a></td>
-            </tr>
+              <td><a href="{{route('classes.destroy', $classe['id'])}}" onclick="confirm('Are you sure you want to delete class?')">Delete</a></td>
+              <td><form action="{{route('classes.destroy', $classe->id)}}" method="POST">  
+                @csrf   
+                @method('DELETE')  
+                <input type="hidden" name="id" value="{{$classe->id}}">
+                {{-- <input type="submit" value="delete">  --}}
+              </form>
+              </tr>
+              
             @endforeach
           </tbody>
         </table>

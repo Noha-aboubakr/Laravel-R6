@@ -223,8 +223,20 @@ Route::post('classes', [ClassController::class, 'store'])->name('classes.store')
                                         
                                             //session 5
 Route::get('classes', [ClassController::class, 'index'])->name('classes.index');
-Route::get('cars/{id}', [CarController::class, 'edit'])->name('cars.edit');
+Route::get('cars/{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
 
 
                                             //session5/task5
-Route::get('classes/{id}', [ClassController::class, 'edit'])->name('classes.edit');
+Route::get('classes/{id}/edit', [ClassController::class, 'edit'])->name('classes.edit');
+
+                                            //session6
+Route::put('cars/{id}', [CarController::class, 'update'])->name('cars.update');
+Route::get('cars/details/{id}', [CarController::class, 'show'])->name('cars.details');
+Route::get('cars/{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
+Route::get('cars/trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
+
+                                            //session6/task6
+Route::put('classes/{id}', [ClassController::class, 'update'])->name('classes.update');
+Route::get('classes/classdetails/{id}', [ClassController::class, 'show'])->name('classes.details');
+Route::get('classes/{id}/deleteclass', [ClassController::class, 'destroy'])->name('classes.destroy');
+Route::get('classes/trashed', [ClassController::class, 'showDeleted'])->name('classes.showDeleted');

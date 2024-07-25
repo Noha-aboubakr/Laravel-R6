@@ -54,17 +54,17 @@ class ClassController extends Controller
 
         ]); 
 
-    return "Data inserted";
-
+    // return "Data inserted";
+    return redirect()->route('classes.index');
 }
-
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $classe= classe::findOrFail($id);
+        return view ('classe_details', compact('classe'));
     }
 
     /**
@@ -81,7 +81,22 @@ class ClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request,$id);
+        
+        $data = [
+            'classname'=> $request->classname,
+            'Capacity' => $request->capacity,
+            'price' => $request->price,
+            'timefrom' => $request->timefrom,
+            'timeto' => $request->timeto,
+            'isfulled' => isset ($request->isfulled),
+
+        ];
+
+        classe::where('id', $id)->update($data);
+
+        // return "data updated";
+        return redirect()->route('classes.index');
     }
 
     /**
@@ -89,6 +104,16 @@ class ClassController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        classe::where('id', $id)->delete();
+        // return "data deleted";
+        return redirect()->route('classes.index');
+        
+    }
+
+    public function showDeleted()
+    {
+      $classes= classe::onlyTrashed()->get();
+    
+        return view('trashedClasses', compact('classes'));
     }
 }
