@@ -36,7 +36,7 @@
               </div>
               <div class="mb-4">
                 <p class="card-text">
-                  <span class="fw-bold">Capacity:</span> {{$classe['capacity']}}$
+                  <span class="fw-bold">Capacity:</span> {{$classe['capacity']}}
                 </p>
               </div>
               <div class="mb-4">
@@ -46,12 +46,12 @@
               </div>
               <div class="mb-4">
                 <p class="card-text">
-                  <span class="fw-bold">From:</span> {{$classe['timefrom']}}$
+                  <span class="fw-bold">From:</span> {{$classe['timefrom']}}
                 </p>
               </div>
               <div class="mb-4">
                 <p class="card-text">
-                  <span class="fw-bold">To:</span> {{$classe['timeto']}}$
+                  <span class="fw-bold">To:</span> {{$classe['timeto']}}
                 </p>
               </div>
               <div class="mb-4">

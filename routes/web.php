@@ -16,25 +16,25 @@ Route::get('w', function () {
 });
 
 
-        //lma adilo defined id fi el uri/ kda el id y2bal letters 3adi
+//lma adilo defined id fi el uri/ kda el id y2bal letters 3adi
 // Route::get('cars/{id}', function ($id) {
 //     return " Car number is " . $id;
 // });
 
 
-        //lma madiloosh id
+//lma madiloosh id
 // Route::get('cars/{id?}', function ($id=0) {
 //     return " Car number is " . $id;
 // });
 
 
-        //lma a7ded in el id yb2a numbers bs
+//lma a7ded in el id yb2a numbers bs
 // Route::get('cars/{id?}', function ($id=0) {
 //     return " Car number is " . $id;
 // })->where(['id'=> '[0+9]+']);
 
 
-        //tari2a tania lta7did in el id yb2a numbers bs
+//tari2a tania lta7did in el id yb2a numbers bs
 // Route::get('cars/{id?}', function ($id=0) {
 //     return " Car number is " . $id;
 // })->whereNumber('id');
@@ -111,7 +111,7 @@ Route::get('w', function () {
 
 
 
-                                            //Session 2/ Task2
+//Session 2/ Task2
 
 //accounts
 
@@ -170,7 +170,7 @@ Route::get('w', function () {
 //     });
 
 
-                                                //Session 3
+//Session 3
 
 //bst7'dmha fi a7'er el app 3shan mayzharsh errors lel user
 // Route::fallback(function(){
@@ -182,12 +182,12 @@ Route::get('cv', function () {
     return view('cv');
 });
 
-Route::get('link', function (){
+Route::get('link', function () {
     $url = route('w');
     return "<a href= '$url'>go to welcome</a>";
 });
 
-Route::get('welcome', function (){
+Route::get('welcome', function () {
     return "Welcome to Laravel.";
 })->name('w');
 
@@ -196,47 +196,56 @@ Route::get('login', function () {
     return view('login');
 });
 
-Route::post('/login_accepted', function (){
+Route::post('/login_accepted', function () {
     return "login accepted.";
 })->name('login_accepted');
 
 
-
-                                                //Session3/task3
+//Session3/task3
 Route::get('contactus', [ExampleController::class, 'contactus']);
-Route::post('contact_us', [ExampleController::class, 'contact_us'])->name('contact_us'); 
+Route::post('contact_us', [ExampleController::class, 'contact_us'])->name('contact_us');
 
 
-                                              //Session4
-Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
-Route::post('cars', [CarController::class, 'store'])->name('cars.store');
+
+                                //Cars
+
+Route::prefix('cars')->group(function() {
+//Session4
+Route::get('create', [CarController::class, 'create'])->name('cars.create');
+Route::post('', [CarController::class, 'store'])->name('cars.store');
+Route::get('', [CarController::class, 'index'])->name('cars.index');
+//Session5
+Route::get('{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
+//session6
+Route::put('{id}', [CarController::class, 'update'])->name('cars.update');
+Route::get('details/{id}', [CarController::class, 'show'])->name('cars.details');
+Route::get('{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
+Route::get('trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
+//session7
+Route::patch('{id}', [CarController::class, 'restore'])->name('cars.restore');
+Route::delete('{id}/forcedelete', [CarController::class, 'forceDelete'])->name('cars.forceDelete');
 
 
-                                            //session5
-Route::get('cars', [CarController::class, 'index'])->name('cars.index');
-    
+// Route::resource('cars', [CarController::class]);
 
-                                            //Session4/task4
-Route::get('classes/create', [ClassController::class, 'create'])->name('classes.create');
-Route::post('classes', [ClassController::class, 'store'])->name('classes.store');
-
-                                        
-                                            //session 5
-Route::get('classes', [ClassController::class, 'index'])->name('classes.index');
-Route::get('cars/{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
+});
 
 
-                                            //session5/task5
-Route::get('classes/{id}/edit', [ClassController::class, 'edit'])->name('classes.edit');
+Route::prefix('classes')->group(function() {
+//Session4/task4
+Route::get('create', [ClassController::class, 'create'])->name('classes.create');
+Route::post('', [ClassController::class, 'store'])->name('classes.store');
+//session5/task5
+Route::get('', [ClassController::class, 'index'])->name('classes.index');
+Route::get('{id}/edit', [ClassController::class, 'edit'])->name('classes.edit');
+//session6/task6
+Route::put('{id}', [ClassController::class, 'update'])->name('classes.update');
+Route::get('classdetails/{id}', [ClassController::class, 'show'])->name('classes.details');
+Route::delete('{id}/deleteclass', [ClassController::class, 'destroy'])->name('classes.destroy');
+Route::get('trashed', [ClassController::class, 'showDeleted'])->name('classes.showDeleted');
+//session7/task7
+Route::patch('{id}', [ClassController::class, 'restore'])->name('classes.restore');
+Route::delete('{id}/forcedelete', [ClassController::class, 'forceDelete'])->name('classes.forceDelete');
 
-                                            //session6
-Route::put('cars/{id}', [CarController::class, 'update'])->name('cars.update');
-Route::get('cars/details/{id}', [CarController::class, 'show'])->name('cars.details');
-Route::get('cars/{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
-Route::get('cars/trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
-
-                                            //session6/task6
-Route::put('classes/{id}', [ClassController::class, 'update'])->name('classes.update');
-Route::get('classes/classdetails/{id}', [ClassController::class, 'show'])->name('classes.details');
-Route::get('classes/{id}/deleteclass', [ClassController::class, 'destroy'])->name('classes.destroy');
-Route::get('classes/trashed', [ClassController::class, 'showDeleted'])->name('classes.showDeleted');
+// Route::resource('cars', [CarController::class]);
+});

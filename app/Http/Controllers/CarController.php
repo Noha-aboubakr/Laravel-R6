@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use Illuminate\Http\RedirectResponse;
 
 class CarController extends Controller
 {
@@ -31,27 +32,41 @@ class CarController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        $cartitle= $request->input('cartitle');
-        $price= $request->input('price');
-        $description= $request->input('description');
-
-        $published= $request->input('published');
-        if($published) {
-			$published= 1;
-			}else {
-				$published = 0; 
-			}
-
-
-        Car::create([
-            'cartitle'=> $cartitle,
-            'price'=> $price,
-            'description'=> $description,
-            'published'=> $published, 
-
+        $data = $request->validate([
+                'cartitle'=> 'required|string',
+                'price'=> 'required|numeric',     //or decimal
+                'description'=> 'required|string|max:1000',                
         ]);
 
+        $data['published']=isset($request->published);
+        // dd($data);
+
+        Car::create($data);
         return redirect()->route('cars.index');
+
+
+
+        // $cartitle= $request->input('cartitle');
+        // $price= $request->input('price');
+        // $description= $request->input('description');
+
+        // $published= $request->input('published');
+        // if($published) {
+		// 	$published= 1;
+		// 	}else {
+		// 		$published = 0; 
+		// 	}
+
+
+        // // Car::create([
+        // //     'cartitle'=> $cartitle,
+        // //     'price'=> $price,
+        // //     'description'=> $description,
+        // //     'published'=> $published, 
+
+        // ]);
+
+        // return redirect()->route('cars.index');
     }
 
 
@@ -62,9 +77,8 @@ class CarController extends Controller
     {
         $car= car::findOrFail($id);
         return view ('car_details', compact('car'));
-
-
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -75,6 +89,7 @@ class CarController extends Controller
         return view ('edit_car', compact('car'));
     }
 
+
     /**
      * Update the specified resource in storage.
      */
@@ -82,19 +97,36 @@ class CarController extends Controller
     {
         // dd($request,$id);
 
-        $data = [
-            'cartitle'=> $request->cartitle,
-            'description' => $request->description,
-            'price' => $request->price,
-            'published' => isset ($request->published),
+        $data = $request->validate([
+            'cartitle'=> 'required|string',
+            'price'=> 'required|numeric',     //or decimal
+            'description'=> 'required|string|max:1000',
+            
+    ]);
 
-        ];
+    $data['published']=isset($request->published);
+    // dd($data);
 
-        Car::where('id', $id)->update($data);
-
+       Car::where('id', $id)->update($data);
         return redirect()->route('cars.index');
+
+
+        // $data = [
+        //     'cartitle'=> $request->cartitle,
+        //     'description' => $request->description,
+        //     'price' => $request->price,
+        //     'published' => isset ($request->published),
+
+        // ];
+
+        // Car::where('id', $id)->update($data);
+
+        // return redirect()->route('cars.index');
     
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -102,7 +134,6 @@ class CarController extends Controller
     public function destroy(string $id)
     {
         Car::where('id', $id)->delete();
-    
         return redirect()->route('cars.index');
     }
 
@@ -111,6 +142,21 @@ class CarController extends Controller
       $cars= Car::onlyTrashed()->get();
     
         return view('trashedCars', compact('cars'));
+    }
+
+    public function restore(string $id)
+    {
+        Car::where('id', $id)->restore();
+    
+        return redirect()->route('cars.showDeleted');
+    }
+
+
+    public function forceDelete(Request $request):RedirectResponse
+    {
+        $id=$request->id;
+        Car::where('id', $id)->forceDelete();
+        return redirect()->route('cars.index');  
     }
 
 }

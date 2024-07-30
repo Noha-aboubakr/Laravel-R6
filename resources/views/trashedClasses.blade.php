@@ -32,6 +32,7 @@
               <th scope="col">From</th>
               <th scope="col">To</th>
               <th scope="col">Is fulled</th>
+              <th scope="col">Restore</th>
               <th scope="col">Deleted</th>
             </tr>
           </thead>
@@ -44,7 +45,18 @@
               <td>{{$classe['timefrom']}}</td>
               <td>{{$classe['timeto']}}</td>
               <td>{{$classe['isfulled']}}</td>
-              <td><a href="">Delete</a></td>
+              
+              <td><form action="{{route('classes.restore',$classe['id'])}}" method="POST">
+                @csrf
+                @method('patch')
+                <button type="submit" class="btn btn-link m-0 p-0">Restore</button>
+              </form></td>
+
+            <td><form action="{{route('classes.forceDelete',$classe['id'])}}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-link m-0 p-0">Permenant Delete</button>
+            </form></td>
             
               </form>
               </tr>

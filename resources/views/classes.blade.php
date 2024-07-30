@@ -42,16 +42,16 @@
               <td scope="row"><a href="{{route('classes.details', $classe['id'])}}">{{$classe['classname']}}</a></td>
               <td>{{$classe['capacity']}}</td>
               <td>{{$classe['price']}}</td>
-              <td>{{$classe['timefrom']}}</td>
-              <td>{{$classe['timeto']}}</td>
+              <td>{{date('h:i A', strtotime($classe['timefrom']))}}</td>
+              <td>{{date('h:i A', strtotime($classe['timeto']))}}</td>
               <td>{{$classe['isfulled']}}</td>
               <td><a href={{route('classes.edit', $classe['id'])}}>Edit</a></td>
-              <td><a href="{{route('classes.destroy', $classe['id'])}}" onclick="confirm('Are you sure you want to delete class?')">Delete</a></td>
+              {{-- <td><a href="{{route('classes.destroy', $classe['id'])}}" onclick="confirm('Are you sure you want to delete class?')">Delete</a></td> --}}
               <td><form action="{{route('classes.destroy', $classe->id)}}" method="POST">  
                 @csrf   
                 @method('DELETE')  
-                <input type="hidden" name="id" value="{{$classe->id}}">
-                {{-- <input type="submit" value="delete">  --}}
+                {{-- <input type="hidden" name="id" value="{{$classe->id}}"> --}}
+                <input type="submit" value="delete"> 
               </form>
               </tr>
               
