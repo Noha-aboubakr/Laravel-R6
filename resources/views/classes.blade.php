@@ -44,7 +44,7 @@
               <td>{{$classe['price']}}</td>
               <td>{{date('h:i A', strtotime($classe['timefrom']))}}</td>
               <td>{{date('h:i A', strtotime($classe['timeto']))}}</td>
-              <td>{{$classe['isfulled']}}</td>
+              <td>@if($classe['isfulled']== 1) Yes @else No @endif</td>
               <td><a href={{route('classes.edit', $classe['id'])}}>Edit</a></td>
               {{-- <td><a href="{{route('classes.destroy', $classe['id'])}}" onclick="confirm('Are you sure you want to delete class?')">Delete</a></td> --}}
               <td><form action="{{route('classes.destroy', $classe->id)}}" method="POST">  

@@ -24,43 +24,67 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Add Class</h2>
-        <form action="{{route('classes.store')}}" method="POST" class="px-md-5">
+        <form action="{{route('classes.store')}}" method="POST" class="px-md-5" enctype="multipart/form-data">
           @csrf
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Class Name:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="Enter the class name" class="form-control py-2" name="classname"/>
+              <input type="text" placeholder="Enter the class name" class="form-control py-2" name="classname" value="{{old('classname')}}"/>
+              @error('classname')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Capacity:</label>
             <div class="col-md-10">
-              <input type="number" placeholder="Enter the class capacity" class="form-control py-2" name="capacity"/>
+              <input type="number" placeholder="Enter the class capacity" class="form-control py-2" name="capacity" value="{{old('capacity')}}"/>
+              @error('capacity')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" placeholder="Enter price" class="form-control py-2" name="price" />
+              <input type="number" step="0.1" placeholder="Enter price" class="form-control py-2" name="price" value="{{old('price')}}"/>
+              @error('price')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time from:</label>
             <div class="col-md-10">
-              <input type="time" placeholder="Enter time" class="form-control py-2" name="timefrom" />
+              <input type="time" placeholder="Enter time" class="form-control py-2" name="timefrom" value="{{old('timefrom')}}"/>
+              @error('timefrom')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Time to:</label>
             <div class="col-md-10">
-              <input type="time" placeholder="Enter time" class="form-control py-2" name="timeto" />
+              <input type="time" placeholder="Enter time" class="form-control py-2" name="timeto" value="{{old('timeto')}}"/>
+              @error('timeto')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
+          <div class="form-group mb-3 row">
+            <label class="form-label col-md-2 fw-bold text-md-end" for="image">Image:</label>
+            <div class="col-sm-10">
+              <input type="file" class="form-control" id="image" name="image" value="{{old('image')}}">
+              @error('image')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <hr>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Is Fulled:</label>
             <div class="col-md-10">
-              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="isfulled"/>
+              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="isfulled" value="1" @checked(old('isfulled'))/>
             </div>
           </div>
           <div class="text-md-end">

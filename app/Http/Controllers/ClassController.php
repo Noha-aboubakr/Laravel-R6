@@ -39,8 +39,15 @@ class ClassController extends Controller
             'capacity'=> 'required|numeric', 
             'price'=> 'required|decimal:0,2',
             'timefrom'=>'required',
-            'timeto'=> 'required|after:timefrom',               
+            'timeto'=> 'required|after:timefrom', 
+            'image'=> 'required|mimes:png,jpg,jpeg',                
     ]);
+
+    $file_extension= $request->image->getClientOriginalExtension();
+    $file_name= time(). '.' . $file_extension;
+    $data['image']=$file_name;
+    $path='assets/images';
+    $request->image->move($path, $file_name); 
 
     $data['isfulled']=isset($request->isfulled);
     // dd($data);
@@ -104,9 +111,18 @@ class ClassController extends Controller
             'capacity'=> 'required|numeric', 
             'price'=> 'required|decimal:0,2',
             'timefrom'=>'required',
-            'timeto'=> 'required|after:timefrom',              
+            'timeto'=> 'required|after:timefrom', 
+            'image'=> 'nullable|mimes:png,jpg,jpeg',              
     ]);
 
+    if ($request->hasFile('image')) { 
+    $file_extension= $request->image->getClientOriginalExtension();
+    $file_name= time(). '.' . $file_extension;
+    $data['image']=$file_name;
+    $path='assets/images';
+    $request->image->move($path, $file_name); 
+    }
+    
     $data['isfulled']=isset($request->isfulled);
     // dd($data);
 

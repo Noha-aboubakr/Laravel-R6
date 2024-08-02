@@ -18,6 +18,7 @@ class CarController extends Controller
         return view('cars', compact('cars'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -25,6 +26,7 @@ class CarController extends Controller
     {
         return view('add_car');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,8 +37,16 @@ class CarController extends Controller
         $data = $request->validate([
                 'cartitle'=> 'required|string',
                 'price'=> 'required|numeric',     //or decimal
-                'description'=> 'required|string|max:1000',                
+                'description'=> 'required|string|max:1000',    
+                'image'=> 'required|mimes:png,jpg,jpeg',            
         ]);
+
+        $file_extension= $request->image->getClientOriginalExtension();
+        $file_name= time(). '.' . $file_extension;
+        $data['image']=$file_name;
+        $path='assets/images';
+        $request->image->move($path, $file_name); 
+
 
         $data['published']=isset($request->published);
         // dd($data);
@@ -70,6 +80,7 @@ class CarController extends Controller
     }
 
 
+    
     /**
      * Display the specified resource.
      */
@@ -78,6 +89,7 @@ class CarController extends Controller
         $car= car::findOrFail($id);
         return view ('car_details', compact('car'));
     }
+
 
 
     /**
@@ -101,8 +113,17 @@ class CarController extends Controller
             'cartitle'=> 'required|string',
             'price'=> 'required|numeric',     //or decimal
             'description'=> 'required|string|max:1000',
-            
+            'image'=> 'nullable|mimes:png,jpg,jpeg', 
     ]);
+
+    if ($request->hasFile('image')) { 
+    $file_extension= $request->image->getClientOriginalExtension();
+    $file_name= time(). '.' . $file_extension;
+    $data['image']=$file_name;
+    $path='assets/images';
+    $request->image->move($path, $file_name); 
+
+    }
 
     $data['published']=isset($request->published);
     // dd($data);
@@ -137,6 +158,8 @@ class CarController extends Controller
         return redirect()->route('cars.index');
     }
 
+
+
     public function showDeleted()
     {
       $cars= Car::onlyTrashed()->get();
@@ -144,12 +167,16 @@ class CarController extends Controller
         return view('trashedCars', compact('cars'));
     }
 
+
+
     public function restore(string $id)
     {
         Car::where('id', $id)->restore();
     
         return redirect()->route('cars.showDeleted');
     }
+
+
 
 
     public function forceDelete(Request $request):RedirectResponse

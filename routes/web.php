@@ -249,3 +249,8 @@ Route::delete('{id}/forcedelete', [ClassController::class, 'forceDelete'])->name
 
 // Route::resource('cars', [CarController::class]);
 });
+
+
+//session8/uploadForm/image
+Route::get('uploadForm', [ExampleController::class, 'uploadForm']);
+Route::post('upload', [ExampleController::class, 'upload'])->name('upload');

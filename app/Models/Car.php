@@ -16,6 +16,7 @@ class Car extends Model
         'cartitle',
         'description',
         'price',
+        'image',
         'published',
     ];
     

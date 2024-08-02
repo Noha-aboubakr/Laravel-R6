@@ -18,6 +18,7 @@ class classe extends Model
         'price',
         'timefrom',
         'timeto',
+        'image',
         'isfulled',
     ];
 }
