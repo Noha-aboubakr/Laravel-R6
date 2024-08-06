@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Car;
 use Illuminate\Http\RedirectResponse;
+use App\Traits\Common;
 
 class CarController extends Controller
 {
+    use common;
+
     /**
      * Display a listing of the resource.
      */
@@ -41,15 +44,9 @@ class CarController extends Controller
                 'image'=> 'required|mimes:png,jpg,jpeg',            
         ]);
 
-        $file_extension= $request->image->getClientOriginalExtension();
-        $file_name= time(). '.' . $file_extension;
-        $data['image']=$file_name;
-        $path='assets/images';
-        $request->image->move($path, $file_name); 
-
-
+        $data['image']= $this->uploadFile($request->image, 'assets/images');
         $data['published']=isset($request->published);
-        // dd($data);
+       
 
         Car::create($data);
         return redirect()->route('cars.index');
@@ -117,12 +114,7 @@ class CarController extends Controller
     ]);
 
     if ($request->hasFile('image')) { 
-    $file_extension= $request->image->getClientOriginalExtension();
-    $file_name= time(). '.' . $file_extension;
-    $data['image']=$file_name;
-    $path='assets/images';
-    $request->image->move($path, $file_name); 
-
+  $data['image']= $this->uploadFile($request->image, 'assets/images');
     }
 
     $data['published']=isset($request->published);

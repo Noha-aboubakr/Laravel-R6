@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\classe;
 use Illuminate\Http\RedirectResponse;
+use App\Traits\Common;
 
 use function Pest\Laravel\post;
 
 
 class ClassController extends Controller
 {
+    use common;
+
     /**
      * Display a listing of the resource.
      */
@@ -38,17 +41,18 @@ class ClassController extends Controller
             'classname'=> 'required|string',
             'capacity'=> 'required|numeric', 
             'price'=> 'required|decimal:0,2',
-            'timefrom'=>'required',
-            'timeto'=> 'required|after:timefrom', 
+            'timefrom'=>'required|date_format:H:i:s',
+            'timeto'=> 'required|date_format:h:i:s|after:timefrom', 
             'image'=> 'required|mimes:png,jpg,jpeg',                
     ]);
 
-    $file_extension= $request->image->getClientOriginalExtension();
-    $file_name= time(). '.' . $file_extension;
-    $data['image']=$file_name;
-    $path='assets/images';
-    $request->image->move($path, $file_name); 
+    // $file_extension= $request->image->getClientOriginalExtension();
+    // $file_name= time(). '.' . $file_extension;
+    // $data['image']=$file_name;
+    // $path='assets/images';
+    // $request->image->move($path, $file_name); 
 
+    $data['image']= $this->uploadFile($request->image, 'assets/images');
     $data['isfulled']=isset($request->isfulled);
     // dd($data);
    
@@ -116,13 +120,14 @@ class ClassController extends Controller
     ]);
 
     if ($request->hasFile('image')) { 
-    $file_extension= $request->image->getClientOriginalExtension();
-    $file_name= time(). '.' . $file_extension;
-    $data['image']=$file_name;
-    $path='assets/images';
-    $request->image->move($path, $file_name); 
+    // $file_extension= $request->image->getClientOriginalExtension();
+    // $file_name= time(). '.' . $file_extension;
+    // $data['image']=$file_name;
+    // $path='assets/images';
+    // $request->image->move($path, $file_name); 
+
+    $data['image']= $this->uploadFile($request->image, 'assets/images');
     }
-    
     $data['isfulled']=isset($request->isfulled);
     // dd($data);
 

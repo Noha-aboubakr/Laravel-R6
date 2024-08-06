@@ -39,7 +39,7 @@
           <tbody>
             @foreach($classes as $classe)
             <tr>
-              <td scope="row"><a href="{{route('classes.details', $classe['id'])}}">{{$classe['classname']}}</a></td>
+              <td scope="row"><a href="{{route('classes.show', $classe['id'])}}">{{$classe['classname']}}</a></td>
               <td>{{$classe['capacity']}}</td>
               <td>{{$classe['price']}}</td>
               <td>{{date('h:i A', strtotime($classe['timefrom']))}}</td>
