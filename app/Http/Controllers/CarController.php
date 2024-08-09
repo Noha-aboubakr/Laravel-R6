@@ -44,7 +44,7 @@ class CarController extends Controller
                 'image'=> 'required|mimes:png,jpg,jpeg',            
         ]);
 
-        $data['image']= $this->uploadFile($request->image, 'assets/images');
+        $data['image']= $this->uploadFile($request->image, 'assets/new/images/cars');
         $data['published']=isset($request->published);
        
 
@@ -114,7 +114,7 @@ class CarController extends Controller
     ]);
 
     if ($request->hasFile('image')) { 
-  $data['image']= $this->uploadFile($request->image, 'assets/images');
+  $data['image']= $this->uploadFile($request->image, 'assets/new/images/cars');
     }
 
     $data['published']=isset($request->published);

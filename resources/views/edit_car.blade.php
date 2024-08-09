@@ -62,7 +62,7 @@
                 <div class="col-md-10">
                   @if($car->image)  
                   <div class="mb-2">  
-                      <img src="{{ asset('assets/images/' . $car->image) }}" alt="Current Image" class="img-thumbnail" style="max-width: 200px;">  
+                      <img src="{{ asset('assets/new/images/cars' . $car->image) }}" alt="Current Image" class="img-thumbnail" style="max-width: 200px;">  
                   </div>  
               @endif  
               <input type="file" class="form-control" id="image" name="image">  

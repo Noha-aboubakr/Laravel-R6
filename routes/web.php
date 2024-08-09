@@ -278,6 +278,7 @@ Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
 
 //session9/fashion
 // Route::get('index', [FashionController::class, 'index']);
+Route::get('about', [FashionController::class, 'about']);
 
 
                                          //session9/task9

@@ -16,7 +16,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('created_at','desc')->take(3)->get();
+        $products = Product::orderBy('created_at','Asc')->take(3)->get();
         return view('index', compact('products'));
     }
 
@@ -61,6 +61,7 @@ class ProductsController extends Controller
     {
         $product= product::findOrFail($id);
         return view ('product_details', compact('product'));
+
     }
 
 
@@ -127,7 +128,6 @@ class ProductsController extends Controller
         Product::where('id', $id)->restore();
         return redirect()->route('products.showDeleted');
     }
-
 
 
 
