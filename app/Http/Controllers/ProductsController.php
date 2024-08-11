@@ -62,8 +62,15 @@ class ProductsController extends Controller
         $product= product::findOrFail($id);
         return view ('product_details', compact('product'));
 
-    }
+//         $relatedProducts = Product::where('category_id', $product->category_id)  
+//         ->where('id', '!=', $id)  
+//         ->take(3)   
+//         ->get();  
 
+// return view('product.show', compact('product', 'relatedProducts'));  
+// } 
+
+    }
 
 
     /**
@@ -122,13 +129,11 @@ class ProductsController extends Controller
     }
 
 
-
     public function restore(string $id)
     {
         Product::where('id', $id)->restore();
         return redirect()->route('products.showDeleted');
     }
-
 
 
     public function forceDelete(Request $request):RedirectResponse
@@ -143,6 +148,12 @@ class ProductsController extends Controller
     {
         $products = Product::get();
         return view('all_products', compact('products'));
+    }
+
+    public function webProducts()
+    {
+       $products = Product::orderBy('created_at','Asc')->take(3)->get();
+        return view('products', compact('products'));
     }
 
 }

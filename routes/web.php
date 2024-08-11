@@ -284,16 +284,22 @@ Route::get('about', [FashionController::class, 'about']);
                                          //session9/task9
 //products
 Route::prefix('products')->group(function () {
+
+                            // Public pages
     Route::get('index', [ProductsController::class, 'index'])->name('products.index');
+    Route::get('webproducts', [ProductsController::class, 'WebProducts'])->name('products.webProducts');
+    Route::get('productdetails/{id}', [ProductsController::class, 'show'])->name('products.show');
+
+                            // Admin pages
     Route::get('allproducts', [ProductsController::class, 'allProducts'])->name('products.allProducts');
     Route::get('create', [ProductsController::class, 'create'])->name('products.create');
     Route::post('', [ProductsController::class, 'store'])->name('products.store');
     Route::get('{id}/edit', [ProductsController::class, 'edit'])->name('products.edit');
     Route::put('{id}', [ProductsController::class, 'update'])->name('products.update');
-    Route::get('productdetails/{id}', [ProductsController::class, 'show'])->name('products.show');
     Route::delete('{id}/deleteproduct', [ProductsController::class, 'destroy'])->name('products.destroy');
     Route::get('trashed', [ProductsController::class, 'showDeleted'])->name('products.showDeleted');
     Route::patch('{id}', [ProductsController::class, 'restore'])->name('products.restore');
     Route::delete('{id}/forcedelete', [ProductsController::class, 'forceDelete'])->name('products.forceDelete');
 
+    
 });

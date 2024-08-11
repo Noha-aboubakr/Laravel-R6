@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -102,7 +103,7 @@ https://www.tooplate.com/view/2127-little-fashion
                     </div>
                 </div>
             </header>
-
+                                            {{-- product details --}}
             <section class="product-detail section-padding">
                 <div class="container">
                     <div class="row">
@@ -161,6 +162,7 @@ https://www.tooplate.com/view/2127-little-fashion
                 </div>
             </section>
 
+                                    {{-- related products --}}
             <section class="related-product section-padding border-top">
                 <div class="container">
                     <div class="row">

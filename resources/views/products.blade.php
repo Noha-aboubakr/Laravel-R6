@@ -16,12 +16,12 @@
 
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="{{asset('assets/new/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{asset('assets/new/css/bootstrap-icons.css')}}" rel="stylesheet">
 
-        <link rel="stylesheet" href="css/slick.css"/>
+        <link rel="stylesheet" href="{{asset('assets/new/css/slick.css')}}"/>
 
-        <link href="css/tooplate-little-fashion.css" rel="stylesheet">
+        <link href="{{asset('assets/new/css/tooplate-little-fashion.css')}}" rel="stylesheet">
 <!--
 
 Tooplate 2127 Little Fashion
@@ -110,11 +110,11 @@ https://www.tooplate.com/view/2127-little-fashion
                         <div class="col-12">
                             <h2 class="mb-5">New Arrivals</h2>
                         </div>
-
+                        @foreach($products as $product) 
                         <div class="col-lg-4 col-12 mb-3">
                             <div class="product-thumb">
-                                <a href="product-detail.html">
-                                    <img src="images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg" class="img-fluid product-image" alt="">
+                                <a href="{{route('products.show', $product['id'])}}">
+                                    <img src="{{asset('assets/new/images/' . $product['image'])}}" class="img-fluid product-image" alt="">
                                 </a>
 
                                 <div class="product-top d-flex">
@@ -126,21 +126,22 @@ https://www.tooplate.com/view/2127-little-fashion
                                 <div class="product-info d-flex">
                                     <div>
                                         <h5 class="product-title mb-0">
-                                            <a href="product-detail.html" class="product-title-link">Tree pot</a>
+                                            <a href="{{route('products.show', $product['id'])}}" class="product-title-link">{{$product['title']}}</a>
                                         </h5>
 
-                                        <p class="product-p">Original package design from house</p>
+                                        <p class="product-p">{{$product['description']}}</p>
                                     </div>
 
-                                    <small class="product-price text-muted ms-auto">$25</small>
+                                    <small class="product-price text-muted ms-auto">${{$product['price']}}</small>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
 
-                        <div class="col-lg-4 col-12 mb-3">
+                        {{-- <div class="col-lg-4 col-12 mb-3">
                             <div class="product-thumb">
                                 <a href="product-detail.html">
-                                    <img src="images/product/jordan-nix-CkCUvwMXAac-unsplash.jpeg" class="img-fluid product-image" alt="">
+                                    <img src="{{asset('assets/new/images/product/jordan-nix-CkCUvwMXAac-unsplash.jpeg')}}" class="img-fluid product-image" alt="">
                                 </a>
 
                                 <div class="product-top d-flex">
@@ -166,7 +167,7 @@ https://www.tooplate.com/view/2127-little-fashion
                         <div class="col-lg-4 col-12">
                             <div class="product-thumb">
                                 <a href="product-detail.html">
-                                    <img src="images/product/nature-zen-3Dn1BZZv3m8-unsplash.jpeg" class="img-fluid product-image" alt="">
+                                    <img src="{{asset('assets/new/images/product/nature-zen-3Dn1BZZv3m8-unsplash.jpeg')}}" class="img-fluid product-image" alt="">
                                 </a>
 
                                 <div class="product-top d-flex">
@@ -185,7 +186,7 @@ https://www.tooplate.com/view/2127-little-fashion
                                     <small class="product-price text-muted ms-auto">$45</small>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="col-12">
                             <h2 class="mb-5">Popular</h2>
@@ -194,7 +195,7 @@ https://www.tooplate.com/view/2127-little-fashion
                         <div class="col-lg-4 col-12 mb-3">
                             <div class="product-thumb">
                                 <a href="product-detail.html">
-                                    <img src="images/product/team-fredi-8HRKoay8VJE-unsplash.jpeg" class="img-fluid product-image" alt="">
+                                    <img src="{{asset('assets/new/images/product/team-fredi-8HRKoay8VJE-unsplash.jpeg')}}" class="img-fluid product-image" alt="">
                                 </a>
 
                                 <div class="product-top d-flex">
@@ -220,7 +221,7 @@ https://www.tooplate.com/view/2127-little-fashion
                         <div class="col-lg-4 col-12 mb-3">
                             <div class="product-thumb">
                                 <a href="product-detail.html">
-                                    <img src="images/product/quokkabottles-kFc1_G1GvKA-unsplash.jpeg" class="img-fluid product-image" alt="">
+                                    <img src="{{asset('assets/new/images/product/quokkabottles-kFc1_G1GvKA-unsplash.jpeg')}}" class="img-fluid product-image" alt="">
                                 </a>
 
                                 <div class="product-top d-flex">
@@ -244,7 +245,7 @@ https://www.tooplate.com/view/2127-little-fashion
                         <div class="col-lg-4 col-12 mb-3">
                             <div class="product-thumb">
                                 <a href="product-detail.html">
-                                    <img src="images/product/anis-m-WnVrO-DvxcE-unsplash.jpeg" class="img-fluid product-image" alt="">
+                                    <img src="{{asset('assets/new/images/product/anis-m-WnVrO-DvxcE-unsplash.jpeg')}}" class="img-fluid product-image" alt="">
                                 </a>
 
                                 <div class="product-top d-flex">
@@ -318,12 +319,12 @@ https://www.tooplate.com/view/2127-little-fashion
         </footer>
 
         <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/Headroom.js"></script>
-        <script src="js/jQuery.headroom.js"></script>
-        <script src="js/slick.min.js"></script>
-        <script src="js/custom.js"></script>
+        <script src="{{asset('assets/new/js/jquery.min.js')}}"></script>
+        <script src="{{asset('assets/new/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{asset('assets/new/js/Headroom.js')}}"></script>
+        <script src="{{asset('assets/new/js/jQuery.headroom.js')}}"></script>
+        <script src="{{asset('assets/new/js/slick.min.js')}}"></script>
+        <script src="{{asset('assets/new/js/custom.js')}}"></script>
 
     </body>
 </html>
