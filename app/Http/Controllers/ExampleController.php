@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 
 class ExampleController extends Controller
 {
@@ -30,7 +32,7 @@ function contact_us(\Illuminate\Http\Request $request) {
            $request->image->move($path, $file_name); 
            return 'uploaded'  ;
         }
-}
+
 
 // Route::get('contactus', function () {
 // return view('contactus');
@@ -45,9 +47,19 @@ function contact_us(\Illuminate\Http\Request $request) {
 // })->name('contact_us'); 
 
 
+public function test() {
+        dd(Student::find(6)?->phone->phone_number);
 
+        // dd(Student::find(6)); all data
 
+        // database queries
+        // DB::table('students')
+        //     ->join('phones', 'phones.id', '=', 'students.phone_id')
+        //     ->where('students.id', '=', 1)
+        //     ->first()
+}
 
-//session8
+}
 
+// ? = null mn 3'eir error
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use App\Traits\Common;
 
@@ -19,6 +20,7 @@ class CarController extends Controller
         //session 5
         $cars = Car::get();
         return view('cars', compact('cars'));
+        $cars = Car::with('category')->get();
     }
 
 
@@ -27,7 +29,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('add_car');
+        $categories = Category::select('id', 'category_name')->get();
+        return view('add_car', compact('categories'));
     }
 
 
@@ -41,10 +44,12 @@ class CarController extends Controller
                 'cartitle'=> 'required|string',
                 'price'=> 'required|numeric',     //or decimal
                 'description'=> 'required|string|max:1000',    
-                'image'=> 'required|mimes:png,jpg,jpeg',            
+                'image'=> 'required|mimes:png,jpg,jpeg',  
+                'category'=> 'required',           
         ]);
 
         $data['image']= $this->uploadFile($request->image, 'assets/new/images/cars');
+        $data ['category_id'] = $request->input('category'); 
         $data['published']=isset($request->published);
        
 
@@ -94,8 +99,15 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
-        $car= car::findOrFail($id);
-        return view ('edit_car', compact('car'));
+        // $car= car::findOrFail($id);
+        // return view ('edit_car', compact('car')); 
+
+
+    $car = Car::findOrFail($id);   
+    $categories = Category::all();   
+    $category = $car->category_id; 
+    return view('edit_car', compact('car', 'categories', 'category')); 
+    
     }
 
 
@@ -109,31 +121,32 @@ class CarController extends Controller
         $data = $request->validate([
             'cartitle'=> 'required|string',
             'price'=> 'required|numeric',     //or decimal
+            'category_id'=> 'required|exists:categories,id',
             'description'=> 'required|string|max:1000',
             'image'=> 'nullable|mimes:png,jpg,jpeg', 
+            
     ]);
 
     if ($request->hasFile('image')) { 
   $data['image']= $this->uploadFile($request->image, 'assets/new/images/cars');
     }
-
+    // $data ['category_id'] = $request->input('category'); 
     $data['published']=isset($request->published);
     // dd($data);
-
+       
        Car::where('id', $id)->update($data);
         return redirect()->route('cars.index');
 
+       
 
         // $data = [
         //     'cartitle'=> $request->cartitle,
         //     'description' => $request->description,
         //     'price' => $request->price,
         //     'published' => isset ($request->published),
-
         // ];
 
         // Car::where('id', $id)->update($data);
-
         // return redirect()->route('cars.index');
     
     }
@@ -146,16 +159,21 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
-        Car::where('id', $id)->delete();
-        return redirect()->route('cars.index');
-    }
+        // Car::where('id', $id)->delete();
+        // return redirect()->route('cars.index');
 
+
+        $car = Car::with('category')->findOrFail($id);  
+        // this code delete data from 2 tables
+        // $car->category_id()->delete();  
+        $car->delete();  
+    return redirect()->route('cars.showDeleted');  
+}  
 
 
     public function showDeleted()
     {
       $cars= Car::onlyTrashed()->get();
-    
         return view('trashedCars', compact('cars'));
     }
 
@@ -164,18 +182,21 @@ class CarController extends Controller
     public function restore(string $id)
     {
         Car::where('id', $id)->restore();
-    
-        return redirect()->route('cars.showDeleted');
+        return redirect()->route('cars.index');
+
     }
-
-
 
 
     public function forceDelete(Request $request):RedirectResponse
     {
         $id=$request->id;
         Car::where('id', $id)->forceDelete();
-        return redirect()->route('cars.index');  
+        return redirect()->route('cars.showDeleted');  
     }
+
+//     public function test() {
+//         dd(Car::find(6));
+
+// }
 
 }

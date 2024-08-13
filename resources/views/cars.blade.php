@@ -29,10 +29,12 @@
             <tr class="table-dark">
               <th scope="col">Car Title</th>
               <th scope="col">Price</th>
+              <th scope="col">Car Category</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
               <th scope="col">Edit</th>
               <th scope="col">Delete</th>
+             
               {{-- <th scope="col">details</th> --}}
 
             </tr>
@@ -43,6 +45,11 @@
               <td scope="row"><a href="{{route('cars.show', $car['id'])}}">{{$car['cartitle']}}</a></td>
               {{-- <td scope="row">{{$car['cartitle']}}</td> --}}
               <td>{{$car['price']}}</td>
+
+             <td> @if($car->category)  
+              <p>{{$car->category->category_name }}</p>  
+            @endif   </td>
+
               <td>{{Str::limit ($car['description'],20,$end='......')}}</td>
               <td>@if($car['published']== 1) Yes @else No @endif</td>
               <td><a href={{route('cars.edit', $car['id'])}}>Edit</a></td>

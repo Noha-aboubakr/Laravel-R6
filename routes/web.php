@@ -216,7 +216,7 @@ Route::prefix('cars')->group(function () {
     //session6
     Route::put('{id}', [CarController::class, 'update'])->name('cars.update');
     Route::get('details/{id}', [CarController::class, 'show'])->name('cars.show');
-    Route::get('{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
+    Route::delete('{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
     Route::get('trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
     //session7
     Route::patch('{id}', [CarController::class, 'restore'])->name('cars.restore');
@@ -303,3 +303,7 @@ Route::prefix('products')->group(function () {
 
     
 });
+
+// session 11
+Route::get('testonetoone', [ExampleController::class, 'test']);
+Route::get('test', [CarController::class, 'test']);

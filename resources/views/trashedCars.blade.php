@@ -29,9 +29,10 @@
             <tr class="table-dark">
               <th scope="col">Car Title</th>
               <th scope="col">Price</th>
+              <th scope="col">Car category</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
-              <th scope="col">Resrore</th>
+              <th scope="col">Restore</th>
               <th scope="col">Deleted</th>
               {{-- <th scope="col">details</th> --}}
 
@@ -43,6 +44,11 @@
               <td scope="row"><a href="">{{$car['cartitle']}}</a></td>
               {{-- <td scope="row">{{$car['cartitle']}}</td> --}}
               <td>{{$car['price']}}</td>
+             
+              <td> @if($car->category)  
+                <p>{{ $car->category->category_name }}</p>  
+              @endif   </td>
+
               <td>{{Str::limit ($car['description'],20,$end='......')}}</td>
               <td>@if($car['published']== 1) yes @else no @endif</td>
               <td><form action="{{route('cars.restore',$car['id'])}}" method="POST">
