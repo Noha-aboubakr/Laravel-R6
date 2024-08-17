@@ -5,8 +5,11 @@ use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FashionController;
 use App\Http\Controllers\ProductsController;
+use App\Mail\ContactMessage;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
@@ -206,7 +209,7 @@ Route::post('contact_us', [ExampleController::class, 'contact_us'])->name('conta
 
 
 //Cars
-Route::prefix('cars')->group(function () {
+Route::prefix('cars')->middleware("verified")->group(function () {
     //Session4
     Route::get('create', [CarController::class, 'create'])->name('classes.create');
     Route::post('', [CarController::class, 'store'])->name('cars.store');
@@ -307,3 +310,12 @@ Route::prefix('products')->group(function () {
 // session 11
 Route::get('testonetoone', [ExampleController::class, 'test']);
 Route::get('test', [CarController::class, 'test']);
+
+// session 12
+'Auth'::routes(['verify' => true]);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+// session 12/task12
+Route::get('contact', [ContactController::class, 'contactindex'])->name('contact.contactindex');
+Route::post('contact/submit', [ContactController::class, 'submit'])->name('contact.submit'); 
