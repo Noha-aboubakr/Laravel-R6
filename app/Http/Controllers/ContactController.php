@@ -24,8 +24,7 @@ class ContactController extends Controller
         ]);  
         // dd($data); 
 
-          Mail::to('hello@example.com')->send(new ContactMessage($data));
-        return redirect()->back()->with('success', 'Your message has been sent successfully!'); 
-      
+          Mail::to('hello@example.com')->send(new ContactMessage($data));   
+         
 }  
     }
