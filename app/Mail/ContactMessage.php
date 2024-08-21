@@ -10,22 +10,17 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-
-
 class ContactMessage extends Mailable
 {
     use Queueable, SerializesModels;
-
     /**
      * Create a new message instance.
      */
     public $data; 
-
     public function __construct($data)
     {
         $this->data = $data;  
     }
-
     /**
      * Get the message envelope.
      */
@@ -35,7 +30,6 @@ class ContactMessage extends Mailable
             subject: 'Contact Message',
         );
     }
-
     /**
      * Get the message content definition.
      */
@@ -49,8 +43,6 @@ class ContactMessage extends Mailable
         ->view('contactemails')  
         ->with('data', $this->data); 
 }  
-    
-
     /**
      * Get the attachments for the message.
      *

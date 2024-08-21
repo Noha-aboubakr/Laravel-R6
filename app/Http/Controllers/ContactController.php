@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Mail; 
 use App\Mail\ContactMessage; 
-use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -13,7 +11,6 @@ class ContactController extends Controller
         return view('contact');
     }
 
-    
     public function submit(Request $request)  
     {  
         $data = $request->validate([  
@@ -23,8 +20,6 @@ class ContactController extends Controller
             'message' => 'required|string',   
         ]);  
         // dd($data); 
-
-          Mail::to('hello@example.com')->send(new ContactMessage($data));   
-         
+          Mail::to('hello@example.com')->send(new ContactMessage($data));       
 }  
     }

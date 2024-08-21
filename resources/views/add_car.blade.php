@@ -48,7 +48,6 @@
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
             <div class="col-md-10">
               <select name="category_id" id="" class="form-control">
-                <option value="">Select Category</option>
                 @foreach($categories as $category)
                 <option value="{{$category->id}}">{{$category->category_name}}</option>
                 @endforeach
