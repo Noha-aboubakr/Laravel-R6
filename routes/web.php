@@ -209,25 +209,25 @@ Route::post('contact_us', [ExampleController::class, 'contact_us'])->name('conta
 
 
 //Cars
-Route::prefix('cars')->middleware("verified")->group(function () {
-    //Session4
-    Route::get('create', [CarController::class, 'create'])->name('classes.create');
-    Route::post('', [CarController::class, 'store'])->name('cars.store');
-    Route::get('', [CarController::class, 'index'])->name('cars.index');
-    //Session5
-    Route::get('{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
-    //session6
-    Route::put('{id}', [CarController::class, 'update'])->name('cars.update');
-    Route::get('details/{id}', [CarController::class, 'show'])->name('cars.show');
-    Route::delete('{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
-    Route::get('trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
-    //session7
-    Route::patch('{id}', [CarController::class, 'restore'])->name('cars.restore');
-    Route::delete('{id}/forcedelete', [CarController::class, 'forceDelete'])->name('cars.forceDelete');
+// Route::prefix('cars')->middleware("verified")->group(function () {
+//     //Session4
+//     // Route::get('create', [CarController::class, 'create'])->name('classes.create');
+//     Route::post('', [CarController::class, 'store'])->name('cars.store');
+//     Route::get('', [CarController::class, 'index'])->name('cars.index');
+//     //Session5
+//     Route::get('{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
+//     //session6
+//     Route::put('{id}', [CarController::class, 'update'])->name('cars.update');
+//     Route::get('details/{id}', [CarController::class, 'show'])->name('cars.show');
+//     Route::delete('{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
+//     Route::get('trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
+//     //session7
+//     Route::patch('{id}', [CarController::class, 'restore'])->name('cars.restore');
+//     Route::delete('{id}/forcedelete', [CarController::class, 'forceDelete'])->name('cars.forceDelete');
 
 
-    // Route::resource('cars', [CarController::class]);
-});
+//     // Route::resource('cars', [CarController::class]);
+// });
 
 
 //classes
@@ -312,10 +312,30 @@ Route::get('testonetoone', [ExampleController::class, 'test']);
 Route::get('test', [CarController::class, 'test']);
 
 // session 12
-'Auth'::routes(['verify' => true]);
+Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 // session 12/task12
 Route::get('contact', [ContactController::class, 'contactindex'])->name('contact.contactindex');
 Route::post('contact/submit', [ContactController::class, 'submit'])->name('contact.submit'); 
+
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ 
+        Route::prefix('cars')->middleware("verified")->group(function () {
+        Route::get('create', [CarController::class, 'create'])->name('classes.create');
+        Route::post('', [CarController::class, 'store'])->name('cars.store');
+        Route::get('', [CarController::class, 'index'])->name('cars.index');
+        Route::get('{id}/edit', [CarController::class, 'edit'])->name('cars.edit');
+        Route::put('{id}', [CarController::class, 'update'])->name('cars.update');
+        Route::get('details/{id}', [CarController::class, 'show'])->name('cars.show');
+        Route::delete('{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
+        Route::get('trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
+        Route::patch('{id}', [CarController::class, 'restore'])->name('cars.restore');
+        Route::delete('{id}/forcedelete', [CarController::class, 'forceDelete'])->name('cars.forceDelete');
+    });
+    });

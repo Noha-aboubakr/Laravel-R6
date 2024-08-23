@@ -16,12 +16,16 @@ class CarController extends Controller
      * Display a listing of the resource.
      */
     public function index()
+
     {
+        // dd(session('test'));
+        
         //session 5
         $cars = Car::get();
         return view('cars', compact('cars'));
         $cars = Car::with('category')->get();
     }
+    
 
 
     /**
@@ -29,6 +33,7 @@ class CarController extends Controller
      */
     public function create()
     {
+        session()->put('test', 'First Laravel session');
         $categories = Category::select('id', 'category_name')->get();
         return view('add_car', compact('categories'));
     }

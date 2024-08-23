@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{LaravelLocalization::getCurrentLocale()}}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
 
 <head>
   <meta charset="UTF-8" />
@@ -23,11 +23,13 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">Add Car</h2>
+        <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
+        <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">{{ __('cars.addHeading')}}</h2>
         <form action="{{route('cars.store')}}" method="POST" class="px-md-5" enctype="multipart/form-data">
           @csrf 
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Car Title:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.addTitle')}}:</label>
             <div class="col-md-10">
               <input type="text" placeholder="BMW" class="form-control py-2" name="cartitle" value="{{old('cartitle')}}"/>
               @error('cartitle')
@@ -36,18 +38,19 @@
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.addPrice')}}:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" placeholder="Enter price" class="form-control py-2" name="price" value="{{old('price')}}"/>
+              <input type="number" step="0.1" placeholder="{{ __('cars.enterPrice')}}" class="form-control py-2" name="price" value="{{old('price')}}"/>
               @error('price')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.addCategory')}}:</label>
             <div class="col-md-10">
               <select name="category_id" id="" class="form-control">
+                <option value="">{{ __('cars.selectCategory')}}</option>
                 @foreach($categories as $category)
                 <option value="{{$category->id}}">{{$category->category_name}}</option>
                 @endforeach
@@ -58,16 +61,16 @@
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.addDescription')}}:</label>
             <div class="col-md-10">
-              <textarea name="description" id="" cols="30" rows="5" class="form-control py-2" value="{{old('description')}}"></textarea>
+              <textarea name="description" id="" cols="30" rows="5" placeholder="{{ __('cars.enterDescription')}}" class="form-control py-2" value="{{old('description')}}"></textarea>
               @error('description')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label class="form-label col-md-2 fw-bold text-md-end" for="image">Image:</label>
+            <label class="form-label col-md-2 fw-bold text-md-end" for="image">{{ __('cars.addImage')}}:</label>
             <div class="col-sm-10">
               <input type="file" class="form-control" id="image" name="image" value="{{old('image')}}">
               @error('image')
@@ -77,14 +80,14 @@
           </div>
           <hr>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.Published')}}:</label>
             <div class="col-md-10">
               <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" value="1" @checked(old('published'))/>
             </div>
           </div>
           <div class="text-md-end">
             <button class="btn mt-4 btn-secondary text-white fs-5 fw-bold border-0 py-2 px-md-5">
-              Add Car
+              {{ __('cars.add')}}
             </button>
           </div>
         </form>
