@@ -8,6 +8,10 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FashionController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SocialController;
+
+use Illuminate\Support\Facades\Auth;
+
 use App\Mail\ContactMessage;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
@@ -338,4 +342,10 @@ Route::group(
         Route::patch('{id}', [CarController::class, 'restore'])->name('cars.restore');
         Route::delete('{id}/forcedelete', [CarController::class, 'forceDelete'])->name('cars.forceDelete');
     });
+
+  
     });
+    Route::get('auth/github/redirect', [SocialController::class, 'redirect'])->name('socialLogin');
+    Route::get('auth/github/callback', [SocialController::class, 'callback']);
+
+   
